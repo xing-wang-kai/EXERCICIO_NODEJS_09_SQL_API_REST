@@ -157,7 +157,20 @@ options são as opiniões que definimos para a tabela.
 ###USANDO METHODS PARA PESQUISAR COM OP DO Sequelize
 ----------------------------------------------------------------------------------------------------------
 
-grand than Equal | Lower Than Equal | between      | or     | in       | like |
-*-----------------|*------------------|*--------------|*--------|*----------|*------|
-[Op.gte]         |   [Op.lte]       | [op.between] |[Op.or] |[Op.in]        | [Op.like]|
-value            |   value          |  [value, value] | [value] | [value]   | 'a%'   |
+|grand than Equal | Lower Than Equal | between      | or     | in       | like     |
+|-----------------|------------------|--------------|--------|----------|----------|
+|[Op.gte]         |   [Op.lte]       | [op.between] |[Op.or] |[Op.in]   | [Op.like]|
+|value            |   value          |[value, value]| [value]|[value]   | 'a%'     |
+
+----------------------------------------------------------------------------------------------------------
+
+###ATRIBUTOS PARA PESQUISAR
+| comandos  | informações      | detalhes                           |
+|-----------|------------------|------------------------------------|
+|attributes:| ['name', 'name'] | - quais campos retornaram da pesquisa |
+|order:     | ["name", "ASC"]  |- pode ser DESC  - a ordem de retorno dos dados|
+|group:     | ['name']         |- como será agrupado os dados|
+|having:    |sequelize.literal(count('value') > number) | - contendo count dentro das informações.|
+
+
+
