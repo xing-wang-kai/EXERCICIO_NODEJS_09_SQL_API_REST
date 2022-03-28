@@ -74,5 +74,85 @@ Ou então::
 
 ```
 ----------------------------------------------------------------------
+### CRIANDO TABELAS DO BD EM MODELS COM Typescript
+----------------------------------------------------------------------
+
+--> Para criar uma tabela precisamos importar duas principais instancias do sequelize.
+
+```javascript
+import { DataTypes, Models } from 'sequelize';
+```
+
+--> Após importar estas duas instancias precisamos definir uma interface para definir os 
+types que serão aceitos.
+
+```javascript
+
+interface userInstance extends Model {
+    id: number;
+    name: string;
+    age: number;
+}
+
+```
+
+--> nesta insterface irá exender os conteúdos e tipos de Models do Sequelize, os campos de criação serão
+ID, NAME, AGE;
+
+--> após este processo precisamos então criar a construção do banco de dados da seguinte maneira.
+```javascript
+
+const user = {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+
+    },
+    nome: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    idade: {
+        type: DataTypes.NUMBER,
+        allowNull: false
+    },
+}
+
+```
+
+--> Em seguida podemos criar as options da construção do banco de dados.
+
+```javascript
+const options = {
+    freezeTableName: true,
+    tableName: 'users',
+    timeStamps: true,
+    createdAt: 'criadoEm',
+    updatedAt: 'atualizadoEm',
+    version: 'versao'
+}
+
+```
+--> Dentro da configurações de options termos, freezeTableName que define
+que o nome será modificado, tableName define o nome de nossa tablea no banco de dados
+a opção timeStamps cria 3 novas colunas no nosso banco que será chamadas de createdAt, updatedAt e version
+podemos renomear as colunas como foi realizado acima no código. **Em caso de não querer criar as colunas podemos
+então somente colocar 'false' em timeStamps.
+
+---> Agora para definir a criação do banco de dados, será invocado do sequelize ( onde está nossa conexão ) o 
+method chamado define ( definir ) este method irá construir a tablela.
+
+```javascript
+const definir = sequelize.define<userInstance>('users', user, options)
+
+export default definir;
+
+```
+
+--> Após a palavra define será colocado o type que criamos para o banco de dados, que será o criado acima.
+primerio parametro é o nome da tabela, segundo paramentro os dados que serão inseridos na tabela, depois
+options são as opiniões que definimos para a tabela.
+
+----------------------------------------------------------------------------------------------------------
 
     
