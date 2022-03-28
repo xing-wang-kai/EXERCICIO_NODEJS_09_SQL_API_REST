@@ -5,7 +5,7 @@ import { sequelize } from '../instances/mysql';
 interface userInstance extends Model {
     id: number;
     name: string;
-    age: number;
+    idade: number;
 }
 
 const user = {

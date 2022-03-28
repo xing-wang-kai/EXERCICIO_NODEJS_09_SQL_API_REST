@@ -8,12 +8,42 @@ Opa {{name}} {{lastName}}, tudo bem?
     Beleza?
 {{/showOld}}
 <hr/>
-<ul>
+<br>
+<br>
+<fieldset>
+    <legend>FORMULÁRIO DE CADASTROS</legend>
+        <form method="post" action="/novousuario">
+            <label for="name">Nome: </label>
+            <input type="text" name="name">
+            <br>
+            <br>
+            <label for="idade">Idade: </label>
+            <input type="number" name="idade" id="">
+            <br>
+            <br>
+            <button>Cadastrar</button>
+    
+        </form>
+    </fieldset>
+    <br>
+    <br>
+<hr/>
+
+
+<table>
+    <thead><th>id</th><th>nome</th><th>idade</th></thead>
     {{#valor}}
-        <li>ID: {{id}}, NOME: {{name}}, IDADE: {{idade}}, CRIADO EM: {{Criado_Em}} e ATUALIZADO EM: {{Atualizado_Em}}</li>
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{idade}}</td>
+            <td><a href="/usuarios/{{id}}/mais">+</a></td>
+            <td><a href="/usuarios/{{id}}/menos">-</a></td>
+            <td><a href="/usuarios/{{id}}/excluir">delete</a></td>
+        </tr>
     {{/valor}}
 
-</ul>
+</table>
 
 
 <hr/>

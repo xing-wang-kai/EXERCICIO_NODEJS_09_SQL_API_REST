@@ -194,6 +194,7 @@ com findAll.
 |5) |limit:     | number value     |                        |
 |6) |offset:    | number value     | - pula tantos itens para antes de visualizar |
 
+EX.:
 
 ```javascript
 
