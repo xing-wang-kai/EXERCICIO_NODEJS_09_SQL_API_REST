@@ -11,7 +11,8 @@ interface userInstance extends Model {
 const user = {
     id: {
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
 
     },
     name: {
@@ -28,11 +29,12 @@ const options = {
     freezeTableName: true,
     tableName: 'users',
     timeStamps: true,
-    createdAt: 'CriadoEm',
-    updatedAt: 'AtualizadoEm',
-    version: 'versao'
+    createdAt: 'Criado_Em',
+    updatedAt: 'Atualizado_Em'
 }
 
 const definir =  sequelize.define<userInstance>("users", user, options);
+
+definir.sync( { alter: true } ).then( ()=> console.log('alterado com sucesso')).catch((error: any) => console.log(`ERRO FOI: ${error.message}`))
 
 export default definir;

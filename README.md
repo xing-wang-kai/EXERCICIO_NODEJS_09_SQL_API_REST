@@ -154,5 +154,10 @@ primerio parametro é o nome da tabela, segundo paramentro os dados que serão i
 options são as opiniões que definimos para a tabela.
 
 ----------------------------------------------------------------------------------------------------------
+###USANDO METHODS PARA PESQUISAR COM OP DO Sequelize
+----------------------------------------------------------------------------------------------------------
 
-    
+grand than Equal | Lower Than Equal | between      | or     | in       | like |
+*-----------------|*------------------|*--------------|*--------|*----------|*------|
+[Op.gte]         |   [Op.lte]       | [op.between] |[Op.or] |[Op.in]        | [Op.like]|
+value            |   value          |  [value, value] | [value] | [value]   | 'a%'   |
