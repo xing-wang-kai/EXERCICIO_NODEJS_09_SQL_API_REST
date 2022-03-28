@@ -162,15 +162,53 @@ options são as opiniões que definimos para a tabela.
 |[Op.gte]         |   [Op.lte]       | [op.between] |[Op.or] |[Op.in]   | [Op.like]|
 |value            |   value          |[value, value]| [value]|[value]   | 'a%'     |
 
+
+EX.: 
+```javascript
+
+    const value = await User.findAll({ 
+        where: {
+            idade: {
+                [Op.gte]: 18,
+                [Op.lte]: 20
+            }
+        }
+    })
+
+```
+
+** O código acima retorna os valores de idade que sejam maiores e iguais a 18 e menores que 20...
+----------------------------------------------------------------------------------------------------------
+###ATRIBUTOS PARA PESQUISAR
 ----------------------------------------------------------------------------------------------------------
 
-###ATRIBUTOS PARA PESQUISAR
-| comandos  | informações      | detalhes                           |
-|-----------|------------------|------------------------------------|
-|attributes:| ['name', 'name'] | - quais campos retornaram da pesquisa |
-|order:     | ["name", "ASC"]  |- pode ser DESC  - a ordem de retorno dos dados|
-|group:     | ['name']         |- como será agrupado os dados|
-|having:    |sequelize.literal(count('value') > number) | - contendo count dentro das informações.|
+Estes comandos são usandos para filtra alguns valores dentro do banco de dados quando damos retorno nos mesmo
+com findAll.
+
+|   | comandos  | informações      | detalhes                           |
+|---|-----------|------------------|------------------------------------|
+|1) |attributes:| ['name', 'name'] | - quais campos retornaram da pesquisa |
+|2) |order:     | ["name", "ASC"]  |- pode ser DESC  - a ordem de retorno dos dados|
+|3) |group:     | ['name']         |- como será agrupado os dados|
+|4) |having:    |sequelize.literal(count('value') > number) | - contendo count dentro das informações.|
+|5) |limit:     | number value     |                        |
+|6) |offset:    | number value     | - pula tantos itens para antes de visualizar |
 
 
+```javascript
+
+    const value = await User.findAll({ 
+        where: {
+            idade: {id: Number.parserInt( id )},
+            attributes: ['name', 'idade'],                  // Retorna somente as columms nome e idade.
+            offset: 10,                                     // Os valores contados começaram do 10,
+            limits: 20,                                     // O resultado só retornará 20 linhas do código.
+            order: [["idade", "DESC"]],                     // retorna ordenado por idade decrescendo para ascendente usa ASC
+            group: ["name"]                                 // Agrupa por name os valores.
+            having: sequelize.literal( "count('idade') > 5")// Executa um comando de forma literal do SQL
+        }
+    })
+
+```
+------------------------------------------------------------------------------------------------------------
 
