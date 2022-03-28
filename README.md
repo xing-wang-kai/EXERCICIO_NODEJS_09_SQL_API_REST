@@ -34,22 +34,45 @@ PARA INSTALAR CONEXAO DEVEMOS ENTÃO INSTACIAR A PORT DO MYSQL E DOS dados
 
 ###CRIAR CONEXÃO
 
-            ~~~
-            import { Sequelize } from 'sequelize';
-            import 'dotenv/config';
+```javascript
+import { Sequelize } from 'sequelize';
+import 'dotenv/config';
 
 
-            export const sequelize = new Sequelize( 
-                process.env.MYSQL_DB as string,
-                process.env.MYSQL_USER as string,
-                process.env.MYSQL_PASSWORD as string,
-                {
-                    host: process.env.MYSQL_HOST as string,
-                    port: Number.parseInt(process.env.MYSQL_PORT as string),
-                    dialect: 'mysql'
-                }
-            )
+export const sequelize = new Sequelize( 
+    process.env.MYSQL_DB as string,
+    process.env.MYSQL_USER as string,
+    process.env.MYSQL_PASSWORD as string,
+    {
+        host: process.env.MYSQL_HOST as string,
+        port: Number.parseInt(process.env.MYSQL_PORT as string),
+        dialect: 'mysql'
+    }
+)
 
-            ~~~
+```
+Para executar um teste de conexão basta somente utilizar o comando do sequelize
+
+```javascript
+
+try{
+        await sequelize.authenticate();
+        console.log('conexão estabelecida com sucesso!! ')
+    }catch{
+        console.log('Ocorreu um erro no momento da conexão')
+    }
+
+```
+
+Ou então:: 
+
+```javascript
+
+    sequelize.authenticate()
+             .then( console.log('conexão ao BD realizada com sucesso!!'));
+             .catch((error)=> console.log('ocorreu um erro ao tentar conectar ao bnc dados'))
+
+```
+----------------------------------------------------------------------
 
     
