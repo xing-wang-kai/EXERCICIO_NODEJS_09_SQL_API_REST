@@ -106,6 +106,7 @@ const user = {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIcrement: true,
 
     },
     nome: {
@@ -205,7 +206,7 @@ EX.:
             offset: 10,                                     // Os valores contados começaram do 10,
             limits: 20,                                     // O resultado só retornará 20 linhas do código.
             order: [["idade", "DESC"]],                     // retorna ordenado por idade decrescendo para ascendente usa ASC
-            group: ["name"]                                 // Agrupa por name os valores.
+            group: ["name"],                                // Agrupa por name os valores.
             having: sequelize.literal( "count('idade') > 5")// Executa um comando de forma literal do SQL
         }
     })
