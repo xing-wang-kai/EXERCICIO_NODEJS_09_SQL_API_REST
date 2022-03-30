@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Product } from '../models/Product';
 import { sequelize } from '../instances/mysql'
 import User from '../models/User';
+import bcrypt from 'bcrypt';
 class Home {
 
     static home = async (req: Request, res: Response)=>{
@@ -43,6 +44,7 @@ class Home {
     static criarUsers = async(req: Request, res: Response) => {
         const valores = req.body;
         try{
+            valores.password = await bcrypt.hash(valores.password, 12)
             await User.create(valores);
     
             res.redirect('/')

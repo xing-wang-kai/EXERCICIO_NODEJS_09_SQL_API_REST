@@ -2,9 +2,18 @@
 
 <fieldset>
     <legend>LOGIN: </legend>
-    <label for="email" class="email">E-mail: </label>
-    <input type="email" name="email" class="input-email" id="none"/>
-    <input type="password" name="" id="">
+    <form method="post" action="/login/log">
+        <label for="email" class="email">E-mail: </label>
+        <input type="email" name="email" class="input-email" id="none" placeholder="exemple@exemple.com.br"/>
+        <br>
+        <br>
+        <label for="password" class="email">Login: </label>
+        <input type="password" name="password" id="" placeholder="**********"/>
+        <br>
+        <br>
+        <br>
+        <button>LOGAR</button>
+    </form>
 
 </fieldset>
 
