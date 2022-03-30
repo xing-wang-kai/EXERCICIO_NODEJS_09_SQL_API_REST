@@ -202,14 +202,14 @@ EX.:
     const value = await User.findAll({ 
         where: {
             idade: {id: Number.parserInt( id )},
-            attributes: ['name', 'idade'],                  // Retorna somente as columms nome e idade.
-            offset: 10,                                     // Os valores contados começaram do 10,
-            limits: 20,                                     // O resultado só retornará 20 linhas do código.
-            order: [["idade", "DESC"]],                     // retorna ordenado por idade decrescendo para ascendente usa ASC
-            group: ["name"],                                // Agrupa por name os valores.
-            having: sequelize.literal( "count('idade') > 5")// Executa um comando de forma literal do SQL
-        }
-    })
+        },
+        attributes: ['name', 'idade'],                  // Retorna somente as columms nome e idade.
+        offset: 10,                                     // Os valores contados começaram do 10,
+        limits: 20,                                     // O resultado só retornará 20 linhas do código.
+        order: [["idade", "DESC"]],                     // retorna ordenado por idade decrescendo para ascendente usa ASC
+        group: ["name"],                                // Agrupa por name os valores.
+        having: sequelize.literal( "count('idade') > 5")// Executa um comando de forma literal do SQL
+})
 
 ```
 ------------------------------------------------------------------------------------------------------------

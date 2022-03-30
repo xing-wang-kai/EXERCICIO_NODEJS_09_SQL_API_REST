@@ -6,6 +6,8 @@ interface userInstance extends Model {
     id: number;
     name: string;
     idade: number;
+    password: string;
+    email: string;
 }
 
 const user = {
