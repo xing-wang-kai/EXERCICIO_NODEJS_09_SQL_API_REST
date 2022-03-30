@@ -14,12 +14,11 @@ class Login{
             if(valores.password){
 
                 try{
-                    
                     const users = await User.findOne( {where: { email: valores.email} } )
-                    const passwords = User.password;
+                    ///const passwords = User.password;
                     if(users){
                         const password: string = "$2b$12$W3fh5x9PUGsIFGPBRBac3.Dk2c4rju.eMwvE3mzqHAVEIZnqGfzM."
-                        if(await bcrypt.compare(valores.password, password )){//preciso ver como instanciar
+                        if(await bcrypt.compare(valores.password, password )){//RESOLVER ISSO!!!!
                             const Token = await JWT.sign({id: users.id}, process.env.CRYPT as string, { expiresIn: "7d"})
                             res.status(200)
                             .redirect('/')
