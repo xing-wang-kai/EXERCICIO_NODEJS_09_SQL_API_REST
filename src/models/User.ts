@@ -1,14 +1,13 @@
-
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/mysql';
-
-interface userInstance extends Model {
-    id: number;
-    name: string;
-    idade: number;
-    password: string;
-    email: string;
+interface userInst extends Model {
+    id: number
+    name: string
+    idade: number
+    email: string
+    password: string
 }
+
 
 const user = {
     id: {
@@ -44,7 +43,7 @@ const options = {
     updatedAt: 'Atualizado_Em'
 }
 
-const definir =  sequelize.define<userInstance>("users", user, options);
+const definir =  sequelize.define<userInst>("users", user, options);
 
 definir.sync( { alter: true } ).then( ()=> console.log('alterado com sucesso')).catch((error: any) => console.log(`ERRO FOI: ${error.message}`))
 

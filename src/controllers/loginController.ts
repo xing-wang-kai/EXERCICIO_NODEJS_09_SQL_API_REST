@@ -2,8 +2,8 @@ import { Request, Response} from 'express';
 import User from '../models/User'
 import bcrypt from "bcrypt";
 import JWT from 'jsonwebtoken'
-import 'dotenv/config'
 
+import 'dotenv/config'
 class Login{
     static acesso = async (req: Request, res: Response) => {
         res.status(200).render('pages/login')
@@ -15,11 +15,11 @@ class Login{
 
                 try{
                     const users = await User.findOne( {where: { email: valores.email} } )
-                    ///const passwords = User.password;
                     if(users){
-                        const password: string = "$2b$12$W3fh5x9PUGsIFGPBRBac3.Dk2c4rju.eMwvE3mzqHAVEIZnqGfzM."
-                        if(await bcrypt.compare(valores.password, password )){//RESOLVER ISSO!!!!
-                            const Token = await JWT.sign({id: users.id}, process.env.CRYPT as string, { expiresIn: "7d"})
+                        const password = users?.password; //string = "$2b$12$W3fh5x9PUGsIFGPBRBac3.Dk2c4rju.eMwvE3mzqHAVEIZnqGfzM."
+                        if(await bcrypt.compare(valores.password, password )){
+                            const Token = await JWT.sign({id: users.id, email: users.email}, process.env.CRYPT as string, { expiresIn: "7d"})
+                            console.log(Token);
                             res.status(200)
                             .redirect('/')
                             console.log({message: "login realizado com sucesso!!", user: users, token: Token})

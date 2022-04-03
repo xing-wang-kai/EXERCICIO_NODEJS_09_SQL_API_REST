@@ -1,10 +1,19 @@
 import { Request, Response } from 'express';
-
 import { Product } from '../models/Product';
 import { sequelize } from '../instances/mysql'
 import User from '../models/User';
 import bcrypt from 'bcrypt';
 class Home {
+
+    static findAll = async (req: Request, res: Response) => {
+        try{
+            const user = await User.findAll();
+            res.status(200).json({user: user, message: `Localizados ${user.length} usuários!!`})
+
+        }catch(error: any){
+            res.status(400).json({message: `Nenhum usuário foi localizado.`})
+        }
+    }
 
     static home = async (req: Request, res: Response)=>{
         try{
@@ -26,7 +35,7 @@ class Home {
     
             let list = Product.getAll();
             let expensiveList = Product.getFromPriceAfter(12);
-    
+            
             res.render('pages/home', {
                 name: 'Kai',
                 lastName: 'Wang',

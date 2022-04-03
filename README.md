@@ -214,3 +214,105 @@ EX.:
 ```
 ------------------------------------------------------------------------------------------------------------
 
+### AUTHENTICATE vs AUTHORIZATION
+
+AUTHENTICATE = Autenticar informações para permitir o acesso.
+AUTHORIZATION = Autorizar acesso a determinada funcionabilidade.
+
+------------------------------------------------------------------------------------------------------------
+
+### BCRYPT
+
+------------------------------------------------------------------------------------------------------------
+
+npm install BCRYPT
+npm install --save-dev @types/bcrypt 
+
+É uma biblioteca usado para criar HASH e salvar senhas de forma protegidas com chave de cryptografia váriate.
+ex.:
+
+```javascript
+import bcrypt from "bcrypt";
+
+static criarUsers = async(req: Request, res: Response) => {
+        const valores = req.body;
+        try{
+            valores.password = await bcrypt.hash(valores.password, 12)
+            await User.create(valores);
+    
+            res.redirect('/')
+            
+        }catch(error: any){
+            res.status(404).json({message: `${error.message} --> Ocorreu um erro ao tentar criar o usuário`})
+        }       
+    };
+```
+
+Neste caso usamos a o method async para envocar a criptografia a chave senha quando a mesma é criada.
+await bcrypt.hash(valores.password, 12)
+
+Esta cryptografia recebe 2 fotores, o primeiro é a senha que o usuário cria no sistema, e a segunda é a salt força
+da cryptografia e o retorno que a mesma vai fornecer.
+
+no caso da senha 123456
+
+o retorno então será: "password": "$2b$12$W3fh5x9PUGsIFGPBRBac3.Dk2c4rju.eMwvE3mzqHAVEIZnqGfzM."
+
+para verificar a senha ao tentar fazer login no sistema usamos outro method chamado compare que recebe
+dois attributes sendo o primeiro a senha usada no login e o segundo a senha cryptografada do usuário no BD.
+
+```javascript
+
+try{
+    const users = await User.findOne( {where: { email: valores.email} } )
+    const password = users?.password;
+    if(await bcrypt.compare(valores.password, password )){
+        res.status(200).redirect('/')
+        console.log({message: "login realizado com sucesso!!"})
+    }else{
+        res.status(400).json({message: `A Senha informada é inválida`})
+    } 
+}catch(error: any){
+    res.status(400).json({message: `${error.message} - Ocorreu um error ao logar`})
+}
+
+```
+
+----------------------------------------------------------------------------------
+
+###Usando o JSONWEBTOKEN..
+
+----------------------------------------------------------------------------------
+
+npm install jsonwebtoken 
+npm install --save-dev @types/jsonwebtoken
+
+Para usar o JWT ou jsonwebtoken precisamos criar a cryptografada no momento do login
+do usuário, a função JWT irá homologar o ID informado (ou qualquer outra ref ) e com uma
+determinada cryptografia irá criar um token. Como terceiro parametro o token recebe um 
+prazo de expiração.
+
+´´´javascript
+
+try{
+    const users = await User.findOne( {where: { email: valores.email} } )
+        const password = users?.password;
+        if(await bcrypt.compare(valores.password, password )){
+            const Token = await JWT.sign({id: users.id}, process.env.CRYPT as string, { expiresIn: "7d"})
+            res.status(200)
+            .redirect('/')
+            console.log({message: "login realizado com sucesso!!", user: users, token: Token})
+        }else{
+            res.status(400).json({message: `A Senha informada é inválida`})
+        }
+}catch(error: any){
+    res.status(400).json({message: `${error.message} - Ocorreu um error ao logar`})
+}
+
+´´´
+
+No exemplo acima usamos a formula: await JWT.sign({id: users.id}, process.env.CRYPT as string, { expiresIn: "7d"})
+
+JWT.sign( identificação, chave, prazo)
+
+---------------------------------------------------------------------------------------------------
