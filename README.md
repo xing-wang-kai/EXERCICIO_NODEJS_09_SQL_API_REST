@@ -355,7 +355,7 @@ html : seu texto do email (em formato HTML)
 
 3) Enviar a messagem;
 
-```
+```javascript
 let info = await transporter.sendMail(mailOptions);
 
               console.log("INFO: ", info)
