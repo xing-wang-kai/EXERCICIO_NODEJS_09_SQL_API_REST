@@ -2,6 +2,8 @@ import { Router } from 'express';
 import Home, * as HomeController from '../controllers/homeController';
 import * as InfoController from '../controllers/infoController';
 import * as UserController from '../controllers/userController';
+import emailController from '../controllers/emailController'
+
 import Login from '../controllers/loginController';
 import Auth from '../middlewares/auth';
 
@@ -16,6 +18,8 @@ router.get('/usuarios/:id/excluir', Home.deleteUser);
 
 router.get('/contato', InfoController.contato);
 router.get('/sobre', InfoController.sobre);
+
+router.post('/emailcontato', emailController.contato);
 
 router.get('/nome', UserController.nome);
 router.get('/idade', UserController.idadeForm);

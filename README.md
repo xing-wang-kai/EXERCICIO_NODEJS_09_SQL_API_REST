@@ -316,3 +316,48 @@ No exemplo acima usamos a formula: await JWT.sign({id: users.id}, process.env.CR
 JWT.sign( identificação, chave, prazo)
 
 ---------------------------------------------------------------------------------------------------
+
+###NODEMAILER
+
+1) configurar o transporter
+
+    configurar o servidor SMTP -- servidor faker mailtrap.io;
+
+```javascript
+let transporter = nodemailer.createTransport({ 
+        service: 'gmail', 
+        auth: { 
+        user: 'youremail@address.com', 
+        pass: 'yourPass' 
+        } 
+    });
+```
+
+2) configurar a messagem
+
+```javascript
+const mailOptions = {
+  from: 'sender@email.com', // sender address
+  to: 'to@email.com', // receiver (use array of string for a list)
+  subject: 'Subject of your email', // Subject line
+  html: '<p>Your html here</p>'// plain text body
+};
+```
+from : o remetente do email
+
+to : o destinatário do email
+
+subject : o assunto do email
+
+html : seu texto do email (em formato HTML)
+
+
+
+3) Enviar a messagem;
+
+```
+let info = await transporter.sendMail(mailOptions);
+
+              console.log("INFO: ", info)
+
+```
