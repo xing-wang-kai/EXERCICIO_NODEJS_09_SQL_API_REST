@@ -379,3 +379,67 @@ let info = await transporter.sendMail(mailOptions);
 -----------------------------------------------------------------------------
 
 Para usar o passaport primeiro importamos em nosso arquivo principal o passaport
+E então na sequência adicionamos app.use e executamos o init do passport.
+
+```javascript
+import passport from 'passport';
+
+server.use(passport.initialize())
+
+```
+
+Criando um arquivo em config para declarar o passaport entao importamos os types
+que será o basicStrategic primeiro:
+
+Depois executamos o código conforme abaixo para buscar o email e usuário e done para
+autentificar ou rejeitar.
+
+```javascript
+
+import passport from "passport";
+import { BasicStrategy } from "passport-http";
+import User from '../models/User';
+import { Request, Response, NextFunction} from 'express';
+
+passport.use( new BasicStrategy(async ( email, password, done )=>{
+
+    try{
+        if(email && password){
+            const user = await User.findOne({ where: { email: email, password: password}})
+
+            if(user){
+                return done(null, user)
+            }
+            else{
+                return done({status:400, message: "usuário nao localizado"}, false)
+            }
+            
+        }else{
+            return done({status: 401, message: 'não autorizado'}, false)
+        }
+    }catch(error:any){
+        return done({message: `${error.code} - Ocorreu Um error`})
+    }   
+    
+    
+}));
+
+export default passport;
+```
+
+Depois criamos a função que será usada para o passaport no middleware em nosso
+processo de autentificar.
+
+```javascript
+
+export const privateRouter = (req: Request, res: Response, next: NextFunction) => {
+    const authFunction = passport.authenticate('basic', (err, user) => {
+        return user ? next() : next({message: `${err.code}`})
+    }) ( req, res, next );
+}
+
+
+```
+------------------------------------------------------------------------------------------
+###USANDO PASSPORT COM JWT
+-----------------------------------------------------------------------------------------
