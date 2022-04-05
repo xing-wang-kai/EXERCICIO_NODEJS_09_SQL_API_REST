@@ -3,6 +3,7 @@ import { Request, Response, NextFunction} from 'express'
 import dotenv from 'dotenv';
 import { ExtractJwt, Strategy as jwtStrategy } from 'passport-jwt';
 import User from '../models/User'
+import bcrypt from 'bcrypt'
 
 dotenv.config();
 
@@ -15,10 +16,17 @@ const options = {
     secretOrkey: process.env.CRYPT as string
 }
 
+const verificarSenha = async ( password : string, passwordhash : string) => {
+    const valorSenha = await bcrypt.compare(password, passwordhash)
+    if(!valorSenha){
+        throw new Error('Email ou Senha inválido.')
+    }
+}
 passport.use( new jwtStrategy( options, async (payload, done) => {
     try{
-        const user = await User.findOne({where: { id: payload.id }})
+        const user = await User.findOne({where: { id: payload.id }});
         if(user){
+            await verificarSenha(payload.password, user.password);
             return done(null, user);
         }else{
             return done( notAuthJSON, false)

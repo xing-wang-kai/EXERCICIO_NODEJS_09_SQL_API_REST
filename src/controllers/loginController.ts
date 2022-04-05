@@ -21,7 +21,8 @@ class Login{
                             const Token = await JWT.sign({id: users.id, email: users.email}, process.env.CRYPT as string, { expiresIn: "7d"})
                             console.log(Token);
                             res.status(200)
-                            .redirect('/')
+                               .set('Authorization', Token)
+                               .redirect('/')
                             console.log({message: "login realizado com sucesso!!", user: users, token: Token})
                         }else{
                             res.status(400).json({message: `A Senha informada é inválida`})

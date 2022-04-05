@@ -485,3 +485,15 @@ passport.use( new jwtStrategy( options, async (payload, done) => {
 
 
 ```
+----------------------------------------------------------------------------
+
+Gerar uma chave aleatório para JWT 
+
+----------------------------------------------------------------------------
+```javascript
+console.log(require('crypto').randomBytes(256).toString('base64'))
+```
+-Este código irá retornar uma chave aleatório com randomBytes do method crypto do javascript
+-----------------------------------------------------------------------------
+
+:star: :star: :star: :star:
