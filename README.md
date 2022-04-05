@@ -32,7 +32,7 @@ instalar
 
 PARA INSTALAR CONEXAO DEVEMOS ENTÃO INSTACIAR A PORT DO MYSQL E DOS dados
 
-###CRIAR CONEXÃO
+### CRIAR CONEXÃO
 
 ```javascript
 import { Sequelize } from 'sequelize';
@@ -155,7 +155,7 @@ primerio parametro é o nome da tabela, segundo paramentro os dados que serão i
 options são as opiniões que definimos para a tabela.
 
 ----------------------------------------------------------------------------------------------------------
-###USANDO METHODS PARA PESQUISAR COM OP DO Sequelize
+### USANDO METHODS PARA PESQUISAR COM OP DO Sequelize
 ----------------------------------------------------------------------------------------------------------
 
 |grand than Equal | Lower Than Equal | between      | or     | in       | like     |
@@ -180,7 +180,7 @@ EX.:
 
 ** O código acima retorna os valores de idade que sejam maiores e iguais a 18 e menores que 20...
 ----------------------------------------------------------------------------------------------------------
-###ATRIBUTOS PARA PESQUISAR
+### ATRIBUTOS PARA PESQUISAR
 ----------------------------------------------------------------------------------------------------------
 
 Estes comandos são usandos para filtra alguns valores dentro do banco de dados quando damos retorno nos mesmo
@@ -225,8 +225,8 @@ AUTHORIZATION = Autorizar acesso a determinada funcionabilidade.
 
 ------------------------------------------------------------------------------------------------------------
 
-npm install BCRYPT
-npm install --save-dev @types/bcrypt 
+`npm install BCRYPT`
+`npm install --save-dev @types/bcrypt` 
 
 É uma biblioteca usado para criar HASH e salvar senhas de forma protegidas com chave de cryptografia váriate.
 ex.:
@@ -284,8 +284,8 @@ try{
 
 ----------------------------------------------------------------------------------
 
-npm install jsonwebtoken 
-npm install --save-dev @types/jsonwebtoken
+`npm install jsonwebtoken` 
+`npm install --save-dev @types/jsonwebtoken`
 
 Para usar o JWT ou jsonwebtoken precisamos criar a cryptografada no momento do login
 do usuário, a função JWT irá homologar o ID informado (ou qualquer outra ref ) e com uma
@@ -369,11 +369,11 @@ let info = await transporter.sendMail(mailOptions);
 -------------------------------------------------------------------
 
 
-|_NPM_ _INSTALL_           |  INSTALL TYPES                      |
+|*_NPM_* *_INSTALL_*           |  *_INSTALL_* *_TYPES_*                      |
 |--------------------------|-------------------------------------|
-|npm install Passport      |npm --save-dev @types/passport       |
-|npm install passport-http |npm --save-dev @types/passport-http  |
-|npm install passport-jwt  |npm --save-dev @types/passport-jwt   |
+|`npm install Passport`      |`npm --save-dev @types/passport`       |
+|`npm install passport-http` |`npm --save-dev @types/passport-http`  |
+|`npm install passport-jwt`  |`npm --save-dev @types/passport-jwt`   |
 
 -----------------------------------------------------------------------------
 
