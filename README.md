@@ -361,3 +361,21 @@ let info = await transporter.sendMail(mailOptions);
               console.log("INFO: ", info)
 
 ```
+
+------------------------------------------------------------------
+
+##Usando o Passport
+
+-------------------------------------------------------------------
+
+|--------------------------|-------------------------------------|
+|_NPM_ _INSTALL_           |  INSTALL TYPES                      |
+|--------------------------|-------------------------------------|
+|npm install Passport      |npm --save-dev @types/passport       |
+|npm install passport-http |npm --save-dev @types/passport-http  |
+|npm install passport-jwt  |npm --save-dev @types/passport-jwt   |
+|--------------------------|-------------------------------------|
+
+-----------------------------------------------------------------------------
+
+Para usar o passaport primeiro importamos em nosso arquivo principal o passaport

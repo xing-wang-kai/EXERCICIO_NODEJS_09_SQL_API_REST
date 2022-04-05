@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { promisify } from 'util';
 import JWT from 'jsonwebtoken';
 
 import 'dotenv/config'
