@@ -442,3 +442,46 @@ export const privateRouter = (req: Request, res: Response, next: NextFunction) =
 ------------------------------------------------------------------------------------------
 ### USANDO PASSPORT COM JWT
 -----------------------------------------------------------------------------------------
+
+`npm install passport-jwt`
+`npm install --save-dev @types/passport-jwt`
+
+e dot env criar a chave para JWT.
+
+Configurações do código para JWT..
+
+```javascript
+
+import passport from 'passport'
+import dotenv from 'dotenv';
+import { ExtractJwt, Strategy as jwtStrategy } from 'passport-jwt';
+import User from '../models/User'
+
+dotenv.config();
+
+const notAuthJSON = {
+    status: 401,
+    message: `Acesso foi negado!`
+}
+const options = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrkey: process.env.CRYPT as string
+}
+
+passport.use( new jwtStrategy( options, async (payload, done) => {
+    try{
+        const user = await User.findOne({where: { id: payload.id }})
+        if(user){
+            return done(null, user);
+        }else{
+            return done( notAuthJSON, false)
+        }   
+        
+    }catch(error:any){
+        return done( notAuthJSON, false)
+    }
+    
+}))
+
+
+```
