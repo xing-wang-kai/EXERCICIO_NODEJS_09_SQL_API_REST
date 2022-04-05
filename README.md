@@ -280,7 +280,7 @@ try{
 
 ----------------------------------------------------------------------------------
 
-###Usando o JSONWEBTOKEN..
+### Usando o JSONWEBTOKEN..
 
 ----------------------------------------------------------------------------------
 
@@ -317,7 +317,7 @@ JWT.sign( identificação, chave, prazo)
 
 ---------------------------------------------------------------------------------------------------
 
-###NODEMAILER
+### NODEMAILER
 
 1) configurar o transporter
 
@@ -364,17 +364,16 @@ let info = await transporter.sendMail(mailOptions);
 
 ------------------------------------------------------------------
 
-##Usando o Passport
+## Usando o Passport
 
 -------------------------------------------------------------------
 
-|--------------------------|-------------------------------------|
+
 |_NPM_ _INSTALL_           |  INSTALL TYPES                      |
 |--------------------------|-------------------------------------|
 |npm install Passport      |npm --save-dev @types/passport       |
 |npm install passport-http |npm --save-dev @types/passport-http  |
 |npm install passport-jwt  |npm --save-dev @types/passport-jwt   |
-|--------------------------|-------------------------------------|
 
 -----------------------------------------------------------------------------
 
@@ -441,5 +440,5 @@ export const privateRouter = (req: Request, res: Response, next: NextFunction) =
 
 ```
 ------------------------------------------------------------------------------------------
-###USANDO PASSPORT COM JWT
+### USANDO PASSPORT COM JWT
 -----------------------------------------------------------------------------------------
